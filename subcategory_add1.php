@@ -53,7 +53,7 @@
         </script>
         <tr>
             <td></td>
-            <td><input type="submit" value="Add" name="add"> </td>
+            <td><input type="submit" value="Add" name="add">&nbsp; &nbsp;</td>
         </tr>
     </form>
 <?php
@@ -82,6 +82,7 @@ if(isset($_POST['add'])){
         <td>Category</td>
         <td>Subcategory</td>
         <td>Add. Category</td>
+        <td>Action</td>
     </tr>
     <h2 align="center">Subcategory List</h2>
     <?php
@@ -98,7 +99,8 @@ if(isset($_POST['add'])){
         echo "<td>".$i."</td>";
         echo "<td>".$result['cname']."</td>";
         echo "<td>" . $result1['subcat'] . "</td>";
-        echo "<td>".$result1['ssub_name']."</td></tr>";
+        echo "<td>".$result1['ssub_name']."</td>";
+        echo "<td>"."<a href='http://localhost/categorymgmt/delete_category.php?id=$result1[id]'>"."DELETE"."</a>"."</td></tr>";
         $i++;
     }
     }
