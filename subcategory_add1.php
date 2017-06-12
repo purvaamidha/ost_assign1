@@ -14,6 +14,7 @@
 <html>
 <head>
     <title>Add Category</title>
+    <script src="js/jquery-1.3.2.min.js"></script>
 </head>
 <body>
 <h2 align="center">Add Subcategory</h2>
@@ -38,6 +39,18 @@
             <td>Sub Category Name</td>
             <td><input type="text" name="subcategory"/></td>
         </tr>
+        <!--Here you find changes-->
+        <tr>
+            <td>Want to add more category?</td>
+            <td><input type="radio" name="active" value="1"/>Yes&nbsp; &nbsp;&nbsp;<input type="radio" name="active" value="0"/>No</td>
+        </tr>
+        <tr>
+            <td>Additional Category Name</td>
+            <td><input type="text" name="ssub_name"/></td>
+        </tr>
+        <script>
+
+        </script>
         <tr>
             <td></td>
             <td><input type="submit" value="Add" name="add"> </td>
@@ -45,13 +58,20 @@
     </form>
 <?php
 if(isset($_POST['add'])){
+    //var_dump($_POST);
     $name = $_POST['subcategory'];
     $cname = $_POST['cat'];
-    $sql = "insert into subcat(id,cid,subcat) values(NULL,$cname,'$name')";
+    /* Here you find changes*/
+    $active = $_POST['active'];
+    $ssub_name = $_POST['ssub_name'];
+    $sql = "insert into subcat(id,cid,subcat,active,ssub_name) values(NULL,'$cname','$name','$active','$ssub_name')";
     $i = $con->query($sql);
     if($i>0){
         echo "<tr><td></td>";
         echo "<td>Sub Category added successfully"."</td></tr>";
+    }else{
+        echo "<tr><td></td>";
+        echo "<td>No Update</td></tr>";
     }
 }
 ?>
@@ -61,6 +81,7 @@ if(isset($_POST['add'])){
         <td>S#</td>
         <td>Category</td>
         <td>Subcategory</td>
+        <td>Add. Category</td>
     </tr>
     <h2 align="center">Subcategory List</h2>
     <?php
@@ -76,7 +97,8 @@ if(isset($_POST['add'])){
         echo "<tr>";
         echo "<td>".$i."</td>";
         echo "<td>".$result['cname']."</td>";
-        echo "<td>" . $result1['subcat'] . "</td></tr>";
+        echo "<td>" . $result1['subcat'] . "</td>";
+        echo "<td>".$result1['ssub_name']."</td></tr>";
         $i++;
     }
     }
